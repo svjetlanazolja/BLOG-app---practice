@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AddNewPosts from "./pages/AddNewPost";
+import Main from "./pages/Home";
+import SinglePost from "./pages/SinglePost";
+import { CardProvider } from "./GlobalContext/State";
+import { Navigation, NavigationLink } from "./pages/SinglePostUI";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CardProvider>
+        <Router>
+          <Navigation>
+            <NavigationLink to="/">Home</NavigationLink>
+            <NavigationLink to="AddPost">Add New Post</NavigationLink>
+          </Navigation>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="AddPost" element={<AddNewPosts />} />
+            <Route path="post" element={<SinglePost />}>
+              <Route path=":id" element={<SinglePost />}></Route>
+            </Route>
+          </Routes>
+        </Router>
+      </CardProvider>
+    </>
   );
-}
+};
 
 export default App;
