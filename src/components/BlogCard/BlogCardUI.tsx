@@ -42,10 +42,27 @@ const Line = styled("hr")(() => ({
   border: "1px solid #f98171",
 }));
 
+const ReactionsRed = styled("div")(() => ({
+  display: "flex",
+  marginTop: "30px",
+}));
+
+const TypographyCounter = styled(Typography)(() => ({
+  marginTop: "8px",
+}));
+
+const ButonIcon = styled(Button)(() => ({
+  border: "none",
+  background: "none",
+}));
+
 export {
   BlogCardsContainer,
   SingleCardContainer,
   TypographyH2,
   BlogButton,
   Line,
+  ReactionsRed,
+  ButonIcon,
+  TypographyCounter,
 };

@@ -6,12 +6,11 @@ import { PostI, UserI } from "./Services/Models";
 import getPosts from "./Services/Posts";
 import getUsers from "./Services/Users";
 
-// import useLocalStorage from "use-local-storage";
-
 const Main = () => {
   const [allPost, setAllPost] = useState<PostI[]>([]);
   const [allAuthors, setAllAuthors] = useState<UserI[]>([]);
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [shuffled, setShuffled] = useState<any>([]);
 
   const getData = async () => {
     setLoading(true);
@@ -36,32 +35,43 @@ const Main = () => {
 
   useEffect(() => {
     getData();
-    setToLocalStorage();
+    // setToLocalStorage();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  function shuffle(array: any) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    // setLoading(false);
+    return array;
+  }
+
   useEffect(() => {
-    setToLocalStorage();
-  }, [allPost, isLoading]);
+    // setToLocalStorage();
+    setShuffled(shuffle(allPost));
+  }, [allPost]);
 
   return isLoading ? (
     <div>Loading...</div>
   ) : (
     <BlogCardsContainer>
-      {allPost.map((blog) => {
-        return (
-          <BlogCard
-            userId={blog.userId}
-            id={blog.id}
-            key={blog.id}
-            blogTitle={blog.title}
-            blogText={blog.body}
-            blogAuthor={getAuthor(blog.userId)}
-            blogDate={<DateBlog />}
-          />
-        );
-      })}
+      {!isLoading &&
+        shuffled?.map((blog: any) => {
+          return (
+            <BlogCard
+              userId={blog.userId}
+              id={blog.id}
+              key={blog.id}
+              blogTitle={blog.title}
+              blogText={blog.body}
+              blogAuthor={getAuthor(blog.userId)}
+              blogDate={<DateBlog />}
+            />
+          );
+        })}
     </BlogCardsContainer>
   );
 };

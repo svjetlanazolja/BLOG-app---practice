@@ -9,6 +9,9 @@ import {
   TypographyH2,
   BlogButton,
   Line,
+  ReactionsRed,
+  ButonIcon,
+  TypographyCounter,
 } from "./BlogCardUI";
 
 interface BlogcardProps {
@@ -86,14 +89,16 @@ const BlogCard: FC<BlogcardProps> = ({
       </BlogButton>
       <Typography>{blogAuthor}</Typography>
       <Typography>{blogDate}</Typography>
-      <Typography>{count}</Typography>
-      <button onClick={() => CountLike()}>
-        <ThumbUpRoundedIcon />
-      </button>
-      <Typography>{countDislike}</Typography>
-      <button onClick={() => CountDislike()}>
-        <ThumbDownAltRoundedIcon />
-      </button>
+      <ReactionsRed>
+        <TypographyCounter>{count}</TypographyCounter>
+        <ButonIcon onClick={() => CountLike()}>
+          <ThumbUpRoundedIcon style={{ fill: "#f98171" }} />
+        </ButonIcon>
+        <TypographyCounter>{countDislike}</TypographyCounter>
+        <ButonIcon onClick={() => CountDislike()}>
+          <ThumbDownAltRoundedIcon style={{ fill: "#f98171" }} />
+        </ButonIcon>
+      </ReactionsRed>
     </SingleCardContainer>
   );
 };
