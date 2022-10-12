@@ -27,11 +27,11 @@ const Main = () => {
     return "";
   };
 
-  const setToLocalStorage = () => {
-    //set u localstorage
-    const temp = JSON.stringify(allPost);
-    localStorage.setItem("myBlogPosts", temp);
-  };
+  // const setToLocalStorage = () => {
+  //   //set u localstorage
+  //   const temp = JSON.stringify(allPost);
+  //   localStorage.setItem("myBlogPosts", temp);
+  // };
 
   useEffect(() => {
     getData();
