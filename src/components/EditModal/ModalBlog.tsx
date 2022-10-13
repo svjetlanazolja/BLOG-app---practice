@@ -2,18 +2,41 @@ import * as React from "react";
 import { useContext, useState, useEffect } from "react";
 import Modal from "@mui/material/Modal";
 import PostContext from "../../GlobalContext/State";
-import { InputLabel, NativeSelect, TextField } from "@mui/material";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  InputLabel,
+  NativeSelect,
+  TextField,
+} from "@mui/material";
 import getUsers from "../../pages/Services/Users";
 import { UserI } from "../../pages/Services/Models";
-import { BoxModalContainer } from "../EditModal/ModalBlogUI";
+import {
+  BoxModalContainer,
+  DialogActionContainer,
+} from "../EditModal/ModalBlogUI";
 import { BlogButton } from "../BlogCard/BlogCardUI";
 
 export default function ModalBlog() {
   const { singlePost } = useContext(PostContext);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const [allAuthors, setAllAuthors] = useState<UserI[]>([]);
-  const handleClose = () => setOpen(false);
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
   const getData = async () => {
     setAllAuthors(await getUsers());
@@ -81,7 +104,29 @@ export default function ModalBlog() {
             })}
           </NativeSelect>
           <br />
-          <BlogButton>Save</BlogButton>
+          <DialogActions>
+            <BlogButton onClick={handleClose}>Cancel</BlogButton>
+
+            <BlogButton variant="outlined" onClick={handleClickOpen}>
+              Save
+            </BlogButton>
+
+            <Dialog
+              open={openDialog}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  You have successfully edited your blog!
+                </DialogContentText>
+              </DialogContent>
+              <DialogActionContainer>
+                <BlogButton onClick={handleCloseDialog}>OK</BlogButton>
+              </DialogActionContainer>
+            </Dialog>
+          </DialogActions>
         </BoxModalContainer>
       </Modal>
     </div>

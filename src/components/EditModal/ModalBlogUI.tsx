@@ -1,4 +1,4 @@
-import { styled, TextField } from "@mui/material";
+import { DialogActions, styled, TextField } from "@mui/material";
 
 const BoxModalContainer = styled("div")(() => ({
   position: "absolute",
@@ -14,4 +14,8 @@ const BoxModalContainer = styled("div")(() => ({
 const TextFieldContainer = styled(TextField)(() => ({
   color: "red",
 }));
-export { BoxModalContainer, TextFieldContainer };
+
+const DialogActionContainer = styled(DialogActions)(() => ({
+  justifyContent: "center",
+}));
+export { BoxModalContainer, TextFieldContainer, DialogActionContainer };
