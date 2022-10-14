@@ -1,7 +1,15 @@
-import { styled } from "@mui/material";
+import { NativeSelect, styled } from "@mui/material";
 
-const AddNewPost = styled("div")(() => ({
-  width: "100%",
+const AddNewPostContainer = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+  maxWidth: "700px",
+  margin: "auto",
+  padding: "40px",
 }));
 
-export default AddNewPost;
+const NativeSelectContainer = styled(NativeSelect)(() => ({
+  margin: "40px 0 50px 0",
+}));
+
+export { AddNewPostContainer, NativeSelectContainer };

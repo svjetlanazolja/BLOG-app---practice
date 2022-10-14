@@ -1,4 +1,5 @@
 export interface PostI {
+  [x: string]: any;
   userId?: number | any;
   id: number;
   title: string;
@@ -10,6 +11,7 @@ export interface PostI {
 export interface GlobalModel {
   singlePost: PostI;
   AddToPost: any;
+  DeleteBlog: any;
 }
 
 export interface UserI {

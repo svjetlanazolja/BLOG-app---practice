@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import Modal from "@mui/material/Modal";
 import PostContext from "../../GlobalContext/State";
 import {
@@ -7,12 +7,9 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  InputLabel,
-  NativeSelect,
   TextField,
 } from "@mui/material";
-import getUsers from "../../pages/Services/Users";
-import { UserI } from "../../pages/Services/Models";
+
 import {
   BoxModalContainer,
   DialogActionContainer,
@@ -23,8 +20,10 @@ export default function ModalBlog() {
   const { singlePost } = useContext(PostContext);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const [allAuthors, setAllAuthors] = useState<UserI[]>([]);
+
   const [openDialog, setOpenDialog] = useState(false);
+
+  const { DeleteBlog } = useContext(PostContext);
 
   const handleClickOpen = () => {
     setOpenDialog(true);
@@ -37,14 +36,6 @@ export default function ModalBlog() {
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
-
-  const getData = async () => {
-    setAllAuthors(await getUsers());
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   return (
     <div>
@@ -67,9 +58,7 @@ export default function ModalBlog() {
             fullWidth
             margin="dense"
           />
-
           <br />
-
           <TextField
             defaultValue={singlePost.body}
             id="standard-textarea"
@@ -80,37 +69,15 @@ export default function ModalBlog() {
             fullWidth
             margin="normal"
           />
-
-          <InputLabel
-            variant="standard"
-            htmlFor="uncontrolled-native"
-            margin="dense"
-          >
-            Author
-          </InputLabel>
-          <NativeSelect
-            defaultValue={30}
-            inputProps={{
-              name: "age",
-              id: "uncontrolled-native",
-            }}
-          >
-            {allAuthors.map((item) => {
-              return (
-                <option key={item.id} value={item.name}>
-                  {item.name}
-                </option>
-              );
-            })}
-          </NativeSelect>
+          <BlogButton onClick={() => DeleteBlog(singlePost.id)}>
+            Delete
+          </BlogButton>
           <br />
           <DialogActions>
             <BlogButton onClick={handleClose}>Cancel</BlogButton>
-
             <BlogButton variant="outlined" onClick={handleClickOpen}>
               Save
             </BlogButton>
-
             <Dialog
               open={openDialog}
               onClose={handleClose}
@@ -131,4 +98,7 @@ export default function ModalBlog() {
       </Modal>
     </div>
   );
+}
+function DeleteBlog(): void {
+  throw new Error("Function not implemented.");
 }

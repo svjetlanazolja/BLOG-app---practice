@@ -31,7 +31,7 @@ const BlogCard: FC<BlogcardProps> = ({
   id,
 }) => {
   const { AddToPost } = useContext(PostContext);
-  const [tempState, setTempState] = useState<BlogcardProps[]>([
+  const [tempState] = useState<BlogcardProps[]>([
     { blogTitle, blogText, blogAuthor, blogDate, id },
   ]);
 

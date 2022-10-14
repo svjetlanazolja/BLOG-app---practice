@@ -22,8 +22,12 @@ export function CardProvider({ children }: any) {
     setSinglePost({ title, body, author, blogDate, id });
   };
 
+  const DeleteBlog = (id: number) => {
+    setSinglePost(singlePost.filter((post: any) => post.id !== id));
+  };
+
   return (
-    <PostContext.Provider value={{ singlePost, AddToPost }}>
+    <PostContext.Provider value={{ singlePost, AddToPost, DeleteBlog }}>
       {children}
     </PostContext.Provider>
   );
