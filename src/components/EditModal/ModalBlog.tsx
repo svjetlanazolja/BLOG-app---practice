@@ -18,12 +18,12 @@ import { BlogButton } from "../BlogCard/BlogCardUI";
 
 export default function ModalBlog() {
   const { singlePost } = useContext(PostContext);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const { DeleteBlog } = useContext(PostContext);
 
   const [openDialog, setOpenDialog] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const { DeleteBlog } = useContext(PostContext);
+  const handleOpen = () => setOpen(true);
 
   const handleClickOpen = () => {
     setOpenDialog(true);
@@ -98,7 +98,4 @@ export default function ModalBlog() {
       </Modal>
     </div>
   );
-}
-function DeleteBlog(): void {
-  throw new Error("Function not implemented.");
 }
