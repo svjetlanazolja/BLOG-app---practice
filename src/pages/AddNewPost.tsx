@@ -31,10 +31,6 @@ const AddNewPost = () => {
 
   return (
     <>
-      {/* <form noValidate autoCapitalize="off">
-        <TextField label="Blog Title" variant="outlined" required />
-      </form> */}
-
       <AddNewPostContainer>
         <form noValidate autoCapitalize="off" onSubmit={handleSubmit}>
           <TextField
